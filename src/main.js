@@ -1,5 +1,5 @@
 // The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.'
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router';
@@ -33,8 +33,6 @@ const app = new Vue({
 //vm.$mount()手动地挂载一个未挂载的实例,类似于el:'#app'
 // 最后效果将会替换页面中id为app的div元素
 // router.go('/');
-
-
 
 // export default router; //将路由器导出
 
