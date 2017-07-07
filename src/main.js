@@ -34,6 +34,8 @@ const app = new Vue({
 // 最后效果将会替换页面中id为app的div元素
 // router.go('/');
 
+
+
 // export default router; //将路由器导出
 
 
