@@ -155,9 +155,7 @@
       register(){
         let arrnotEmpty = ['checkimgcode','checkcode','password'];//非空输入验证
         let arrReg = ['checkimgcode'];//正则验证
-//        for(let i=0;i<arrnotEmpty.length;i++){
-//          this.regData[arrnotEmpty[i]].error='';
-//        }
+
         if( this.regData.submited )
         {
           return false;

@@ -76,7 +76,6 @@
         alertMsgSuper(msg){
           this.$parent.alertIsShow = true;
           msg = msg || '';
-//          type = type || 0;
           this.conMsg = msg;
         },
         openImageProxy: function (event) {

@@ -24,17 +24,17 @@
         </div>
       </div>
     </div>
-    <component v-bind:item="special" v-bind:is="currentView" v-if="show" keep-alive>
+    <component v-bind:item="special" v-bind:is="currentView" v-if="show">
       <!--&lt;!&ndash;&lt;!&ndash; 组件在 vm.currentview 变化时改变！ &ndash;&gt;&ndash;&gt;-->
     </component>
-    <register :oMobileVal2="oMobileVal"></register>
+    <register1 :oMobileVal2="oMobileVal"></register1>
     <p class="m-frid"><friendshare class="disshow"></friendshare><span v-show="ruleShow" class="ml30 j-rule" @click="rule">活动规则  >></span></p>
     <!--<p class="m-frid"><span class="j-friend" @click="friendForward">转给其他好友  >></span><span v-show="ruleShow" class="ml30 j-rule" @click="rule">活动规则  >></span></p>-->
     <alertmsg v-show="alertIsShow" ref="alertmsg" :oStyle="objectStyle" v-on:myHeight="toAlertHeight" v-on:myWidth="toAlertWidth"></alertmsg>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import register from '@/components/register/register'
+  import register1 from '@/components/register/register1'
   import alertmsg from '@/components/alertmsg/alertmsg'
   import {urlParse,urlSite,removeClassName} from '@/common/js/request';
   import friendshare from '@/components/friendshare/friendshare';
@@ -215,8 +215,12 @@
           }
           let params = {
             random: this.getUrlData.random,
-            mobile: this.oMobileVal
+            mobile: this.oMobileVal,
+            exchangeId:this.$route.query.exchangeId,
+            linkId:this.$route.query.linkId,
+            friendId:this.$route.query.friendId
           };
+          console.log(this.$route.query)
           this.$http.post('/redPacket/api.php?action=checkShare', params, {
             emulateJSON: true
           }).then(function (res) {
@@ -227,8 +231,9 @@
               let oReg = document.getElementById('m-reg');
               removeClassName(oReg, 'm-reg');
               this.isClick = 1;
-            } else {
-//                    this.$refs.index1.style.display = 'none';
+            }
+            else {
+              this.$refs.index1.style.display = 'none';
               this.show = true;
 //              this.msg = data.message.message;
                     this.special[0].error = data.message.message;
@@ -251,7 +256,7 @@
                       <p>7、本次活动与苹果公司无关。</p>\
                       <div class="m-bn mt38 mb32"><a href="javascript:;" class="c_fd5600 gainbn" id="gainbn">关闭</a></div>\
                       </div></div>';
-        this.$refs.alertmsg.alertMsgSuper(msgCon);
+          this.$refs.alertmsg.alertMsgSuper(msgCon);
       },
       friendNum(){
         this.$http.get('http://g.cn',{
@@ -259,20 +264,20 @@
         }).then((res)=>{
           let data = res.data;
           this.friname = data.name;
-//          if(!data.id){
-//            this.$http.post('/redPacket/api.php?action=checkShare', {
-//              emulateJSON: true
-//            }).then(function (res) {
-//              let data = res.data;
-//              this.$refs.index1.style.display = 'none';
-//              this.ruleShow = false;
-//              if (data.message.code == 0) {
-//              } else {
-//                this.show = true;
-//                this.special[0].error = data.message.message;
-//              }
-//            })
-//          }
+          if(!data.id){
+            this.$http.post('/redPacket/api.php?action=checkShare', {
+              emulateJSON: true
+            }).then(function (res) {
+              let data = res.data;
+              this.$refs.index1.style.display = 'none';
+              this.ruleShow = false;
+              if (data.message.code == 0) {
+              } else {
+                this.show = true;
+                this.special[0].error = data.message.message;
+              }
+            })
+          }
           console.log(data)
           console.log(data.id)
         })
@@ -294,9 +299,9 @@
       this.friendNum();
     },
     components: {
-      register,
+      register1,
       alertmsg,
-      friendshare
+      friendshare,
 //      errormsg,
 //      'friendshare': () => import('@/components/friendshare/friendshare')
 //      'my-component':Child

@@ -9,7 +9,6 @@ import suc from '@/components/suc/suc';
 Vue.config.productionTip = false      //来关闭生产模式下给出的提示
 Vue.use(VueRouter);     //显式声明使用路由
 Vue.use(VueResource);
-
 // 创建路由实例并配置路由映射
 const router = new VueRouter({
   hashbang: false,        //为true时，将路径格式化为#!开头  http://localhost:8282/#/
@@ -26,15 +25,15 @@ const app = new Vue({
   // render: function(createElement) {
   //   return createElement();
   // }
-  template: '<App/>',/*告知页面这个组件用这样的标签来包裹着,并且使用它*/
-  components: { App }/*告知当前页面想使用App这个组件*/
-  // render: h => h(App)
+  // template: '<App/>',/*告知页面这个组件用这样的标签来包裹着,并且使用它*/
+  // components: { App }/*告知当前页面想使用App这个组件*/
+  render: h => h(App)
 }).$mount('#app')
 //vm.$mount()手动地挂载一个未挂载的实例,类似于el:'#app'
 // 最后效果将会替换页面中id为app的div元素
 // router.go('/');
 
-// export default router; //将路由器导出
+export default router; //将路由器导出
 
 
 // {
